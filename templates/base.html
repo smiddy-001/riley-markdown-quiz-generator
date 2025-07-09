@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Quiz</title>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+        <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+                crossorigin="anonymous"></script>
+    </head>
+    <body class="flex min-h-screen bg-white text-base-content">
+
+        <!-- Sidebar -->
+        <div class="w-64 p-4">
+            <h2 class="text-xl font-bold mb-4">Navigation</h2>
+
+            <!-- Dropdown for each course -->
+            {% for course in ['COSC261', 'SENG201', 'SENG365', 'MATH220'] %}
+            <div class="!visible collapse collapse-arrow mb-2">
+                <input type="checkbox" class="peer" id="collapse-{{ course|lower }}" />
+                <div class="collapse-title font-medium peer-checked:bg-base-200">
+                    {{ course }}
+                </div>
+                <div class="collapse-content hidden peer-checked:block">
+                    <ul class="menu">
+                        {% for i in range(1, 12) %}
+                        <li><a href="./{{ course|lower }}_w{{ i }}.html">{{ course }} Week {{ i }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Main content -->
+        <div class="flex-1 p-6">
+            {{ content | safe }}
+            <script type="text/javascript">{{ javascript | safe }}</script>
+        </div>
+    </body>
+    </html>
